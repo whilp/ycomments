@@ -41,7 +41,11 @@
 
     $.fn.ycomments.thread = function (thread, depth) {
         var html = "<article class='ycomments-comment ycomments-comment-depth-" + depth + "'>" +
-            "<header>posted by: " + thread.postedBy + "</header>";
+            "<header><p>" + 
+                thread.points + " points " +
+                "by " + $.fn.ycomments.user(thread.postedBy) + " " +
+                thread.postedAgo + " | " + $.fn.ycomments.postid(thread.id, "link") +
+            "</p></header>";
         $.each(thread.children, function () {
             html += $.fn.ycomments.thread(this, depth + 1);
         });
@@ -49,5 +53,14 @@
 
         return html;
     };
+
+    $.fn.ycomments.user = function (user) {
+        var html = "<a href='http://news.ycombinator.com/user?id=%s'>%s</a>";
+        return html.replace(/%s/g, user);
+    }
+
+    $.fn.ycomments.postid = function (id, text) {
+        return "<a href='http://news.ycombinator.com/item?id=" + id + "'>" + text + "</a>";
+    }
 })(jQuery);
 
