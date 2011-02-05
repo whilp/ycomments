@@ -2,6 +2,7 @@
     var settings = {},
         defaults = {
             api: "http://api.ihackernews.com/post/%s?format=jsonp",
+            apidatatype: "jsonp",
         };
 
     $.fn.ycomments = function (options) {
@@ -14,7 +15,7 @@
         var $this = $(this),
             url = settings.api.replace("%s", settings.id);
 
-        $.ajax({url: url, dataType: "jsonp"})
+        $.ajax({url: url, dataType: settings.apidatatype})
             .success(showcomments);
     };
 
