@@ -15,11 +15,16 @@
         var $this = $(this),
             url = settings.api.replace("%s", settings.id);
 
+        var jump = $("<a href='#ycomments-thread' id='ycomments-jump'>" +
+            "Show comments on Hacker News</a>");
+        $this.append(jump);
+
         $.ajax({url: url, dataType: settings.apidatatype})
-            .success(showcomments);
+            .success(function (data) { showcomments(data, jump, $this); } );
     };
 
-    showcomments = function (data) {
+    showcomments = function (data, jump, article) {
+        jump.text(jump.text().replace("Show", data.commentCount));
     };
 })(jQuery);
 
