@@ -25,6 +25,29 @@
 
     showcomments = function (data, jump, article) {
         jump.text(jump.text().replace("Show", data.commentCount));
+
+        var comments = "<section id='ycomments-thread'>" + 
+            "<header><h1>Showing " + data.commentCount + " comments</h1>" +
+            "<p>Sort comments</p>" + 
+            "</header>";
+
+        $.each(data.comments, function () {
+            comments += $.fn.ycomments.thread(this, 0);
+        });
+
+        comments += '</section>';
+        article.append(comments);
+    };
+
+    $.fn.ycomments.thread = function (thread, depth) {
+        var html = "<article class='ycomments-comment ycomments-comment-depth-" + depth + "'>" +
+            "<header>posted by: " + thread.postedBy + "</header>";
+        $.each(thread.children, function () {
+            html += $.fn.ycomments.thread(this, depth + 1);
+        });
+        html += "</article>";
+
+        return html;
     };
 })(jQuery);
 
