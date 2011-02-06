@@ -20,15 +20,25 @@
         var $this = $(this),
             url = settings.api.replace("%s", settings.id);
 
-        var discuss = $.fn.ycomments.postid(settings.id, "Discuss this on Hacker News") + " | ";
-        $this.append(discuss);
+        $this.append("<ul class='ycomments-meta'>" +
+            "<li><a id='ycomments-points' " + 
+                "href='http://news.ycombinator.com/item?id=" + settings.id + "'>0 points</a></li>" + 
+            "<li><a href='#ycomments-thread' id='ycomments-jump'>Show comments</a></li>" + 
+            "<li><a href='#ycomments-thread' id='ycomments-refresh'>Refresh</a></li>" + 
+            "</ul>");
+        var jump = $("#ycomments-jump"),
+            points = $("#ycomments-points");
 
-        var jump = $("<a href='#ycomments-thread' id='ycomments-jump'>" +
-            "Show comments</a>");
-        $this.append(jump);
+        fetch = function () {
+            $.ajax({url: url, dataType: settings.apidatatype})
+                .success(function (data) { showcomments(data, jump, points, $this); } );
+        };
 
-        $.ajax({url: url, dataType: settings.apidatatype})
-            .success(function (data) { showcomments(data, jump, $this); } );
+        $("#ycomments-refresh").click(function () {
+            fetch();
+        });
+
+        fetch();
     };
 
     getid = function (url, cb) {
@@ -39,9 +49,9 @@
             .success(function (data) { settings.id = data[0]; cb() });
     };
 
-    showcomments = function (data, jump, article) {
+    showcomments = function (data, jump, points, article) {
         jump.text(jump.text().replace("Show", data.commentCount));
-        jump.before(data.points + " points | ");
+        points.text(points.text().replace(/[-0-9]+/, data.points));
 
         var comments = "<section id='ycomments-thread'>" + 
             "<header><h1>Showing " + data.commentCount + " comments</h1>" +

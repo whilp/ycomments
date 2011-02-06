@@ -14,3 +14,9 @@
 .ycomments-unpopular {
     color: #888888;
 }
+
+.ycomments-meta li {
+    list-style-type: none;
+    display: inline;
+    margin: 0 .2em 0 .2em;
+}

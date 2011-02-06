@@ -53,15 +53,14 @@ Then, add the following at the bottom of your article:
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.js"></script>
 <script src="https://github.com/wcmaier/ycomments/raw/master/ycomments.js"></script>
 <script>
-$("article").ycomments({
-    id: "$HNID",
-});
+$("article").ycomments();
 </script>
 ]]>
 </pre></code>
 
 <p>
 Now, when people read your article and start commenting on it at HN, their comments will show up under your article.
+If the Y Comments fails to find the proper thread on HN, you can call <code>ycomments({id: "$HNID"})</code> instead; this is particularly useful when testing locally-served pages (where <code>window.location</code> is not equal to your final URL).
 It should look something like this:
 </p>
 
