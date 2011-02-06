@@ -1,4 +1,12 @@
-article.ycomments-comment {
+#ycomments-thread h1 {
+    font-size: small;
+}
+
+#ycomments-thread > .ycomments-comment {
+    margin-left: 0;
+}
+
+.ycomments-comment {
     display: block;
     margin-left: 2em;
 }
