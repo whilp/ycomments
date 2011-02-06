@@ -47,7 +47,7 @@
                 thread.postedAgo + " | " + $.fn.ycomments.postid(thread.id, "link") +
             "</p></header>";
 
-        html += $.fn.ycomments.comment(thread.comment);
+        html += "<p class='ycomments-comment-text'>" + $.fn.ycomments.comment(thread.comment) + "</p>";
         html += "<p>" + $.fn.ycomments.reply(thread.id, thread.parentId) + "</p>";
 
         $.each(thread.children, function () {
