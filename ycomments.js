@@ -15,6 +15,9 @@
         var $this = $(this),
             url = settings.api.replace("%s", settings.id);
 
+        var discuss = $.fn.ycomments.postid(settings.id, "Discuss this on Hacker News") + " | ";
+        $this.append(discuss);
+
         var jump = $("<a href='#ycomments-thread' id='ycomments-jump'>" +
             "Show comments on Hacker News</a>");
         $this.append(jump);
