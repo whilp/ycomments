@@ -39,8 +39,8 @@
         article.append(comments);
     };
 
-    $.fn.ycomments.thread = function (thread, depth) {
-        var html = "<article class='ycomments-comment ycomments-comment-depth-" + depth + "'>" +
+    $.fn.ycomments.thread = function (thread) {
+        var html = "<article class='ycomments-comment'>" +
             "<header><p>" + 
                 thread.points + " points " +
                 "by " + $.fn.ycomments.user(thread.postedBy) + " " +
@@ -50,7 +50,7 @@
         html += $.fn.ycomments.comment(thread.comment);
 
         $.each(thread.children, function () {
-            html += $.fn.ycomments.thread(this, depth + 1);
+            html += $.fn.ycomments.thread(this);
         });
         html += "</article>";
 
