@@ -72,7 +72,6 @@
 
     $.fn.ycomments.comment = function (comment) {
         return comment
-            .replace(/&/g, "&amp;")
             .replace(/color=\"#......\"/, "")
             .replace(/<p>/g, "<br />");
     };
