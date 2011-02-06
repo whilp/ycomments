@@ -1,0 +1,8 @@
+article.ycomments-comment {
+    display: block;
+    margin-left: 2em;
+}
+
+.ycomments-unpopular {
+    color: #888888;
+}
