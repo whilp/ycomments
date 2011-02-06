@@ -28,7 +28,6 @@
 
         var comments = "<section id='ycomments-thread'>" + 
             "<header><h1>Showing " + data.commentCount + " comments</h1>" +
-            "<p>Sort comments</p>" + 
             "</header>";
 
         $.each(data.comments, function () {
