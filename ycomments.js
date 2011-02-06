@@ -21,9 +21,10 @@
             url = settings.api.replace("%s", settings.id);
 
         $this.append("<ul class='ycomments-meta'>" +
+            "<li>This article is on <a href='http://news.ycombinator.com/'>Hacker News</a>: </li>" + 
             "<li><a id='ycomments-points' " + 
-                "href='http://news.ycombinator.com/item?id=" + settings.id + "'>0 points</a></li>" + 
-            "<li><a href='#ycomments-thread' id='ycomments-jump'>Show comments</a></li>" + 
+                "href='http://news.ycombinator.com/item?id=" + settings.id + "'>0 points</a> | </li>" + 
+            "<li><a href='#ycomments-thread' id='ycomments-jump'>Show comments</a> | </li>" + 
             "<li><a href='#ycomments-thread' id='ycomments-refresh'>Refresh</a></li>" + 
             "</ul>");
         var jump = $("#ycomments-jump"),
