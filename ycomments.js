@@ -48,6 +48,7 @@
             "</p></header>";
 
         html += $.fn.ycomments.comment(thread.comment);
+        html += $.fn.ycomments.reply(thread.id, thread.parentId);
 
         $.each(thread.children, function () {
             html += $.fn.ycomments.thread(this);
@@ -77,6 +78,12 @@
         return "<a class='ycomments-vote' " +
             "href='http://news.ycombinator.com/vote?for=" + id +
             "&amp;dir=up&amp;whence=item&amp;id=" + (parent ? parent : id) + "'>▲</a>";
+    };
+
+    $.fn.ycomments.reply = function (id, parent) {
+        return "<a class='ycomments-reply' " +
+            "href='http://news.ycombinator.com/reply?id=" + id +
+            "&amp;whence=item&amp;id=" + (parent ? parent : id) + "'>reply</a>";
     };
 })(jQuery);
 
