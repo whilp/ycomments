@@ -67,7 +67,9 @@
     };
 
     $.fn.ycomments.comment = function (comment) {
-        return comment.replace(/<p>/g, "<br />");
+        return comment
+            .replace(/color=\"#......\"/, "")
+            .replace(/<p>/g, "<br />");
     };
 })(jQuery);
 
