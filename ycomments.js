@@ -12,6 +12,11 @@
     };
 
     init = function () {
+        if (!settings.id) {
+            var root = this;
+            return getid(window.location, function () { init.call(root); } );
+        }
+
         var $this = $(this),
             url = settings.api.replace("%s", settings.id);
 
@@ -19,15 +24,24 @@
         $this.append(discuss);
 
         var jump = $("<a href='#ycomments-thread' id='ycomments-jump'>" +
-            "Show comments on Hacker News</a>");
+            "Show comments</a>");
         $this.append(jump);
 
         $.ajax({url: url, dataType: settings.apidatatype})
             .success(function (data) { showcomments(data, jump, $this); } );
     };
 
+    getid = function (url, cb) {
+        url = "http://api.ihackernews.com/getid?url=" + encodeURIComponent(url) + 
+            "&format=jsonp";
+        
+        $.ajax({url: url, dataType: settings.apidatatype, async: false})
+            .success(function (data) { settings.id = data[0]; cb() });
+    };
+
     showcomments = function (data, jump, article) {
         jump.text(jump.text().replace("Show", data.commentCount));
+        jump.before(data.points + " points | ");
 
         var comments = "<section id='ycomments-thread'>" + 
             "<header><h1>Showing " + data.commentCount + " comments</h1>" +
