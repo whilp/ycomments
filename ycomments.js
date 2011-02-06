@@ -20,19 +20,21 @@
         var $this = $(this),
             url = settings.api.replace("%s", settings.id);
 
-        $this.append("<ul class='ycomments-meta'>" +
+        $this.append("<section id='ycomments-thread'>" +
+            "<ul class='ycomments-meta'>" +
             "<li>This article is on <a href='http://news.ycombinator.com/'>Hacker News</a>: </li>" + 
             "<li><a id='ycomments-points' " + 
                 "href='http://news.ycombinator.com/item?id=" + settings.id + "'>0 points</a> | </li>" + 
             "<li><a href='#ycomments-thread' id='ycomments-jump'>Show comments</a> | </li>" + 
             "<li><a href='#ycomments-thread' id='ycomments-refresh'>Refresh</a></li>" + 
-            "</ul>");
+            "</ul></section>");
         var jump = $("#ycomments-jump"),
-            points = $("#ycomments-points");
+            points = $("#ycomments-points"),
+            comments = $("#ycomments-thread");
 
         fetch = function () {
             $.ajax({url: url, dataType: settings.apidatatype})
-                .success(function (data) { showcomments(data, jump, points, $this); } );
+                .success(function (data) { showcomments(data, jump, points, comments); } );
         };
 
         $("#ycomments-refresh").click(function () {
@@ -54,15 +56,14 @@
         jump.text(jump.text().replace("Show", data.commentCount));
         points.text(points.text().replace(/[-0-9]+/, data.points));
 
-        var comments = "<section id='ycomments-thread'>" + 
-            "<header><h1>Showing " + data.commentCount + " comments</h1>" +
-            "</header>";
+        $("#ycomments-thread .ycomments-comment").remove();
+
+        var comments = "";
 
         $.each(data.comments, function () {
             comments += $.fn.ycomments.thread(this, 0);
         });
 
-        comments += '</section>';
         article.append(comments);
     };
 
