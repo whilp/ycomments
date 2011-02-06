@@ -48,7 +48,7 @@
             "</p></header>";
 
         html += $.fn.ycomments.comment(thread.comment);
-        html += $.fn.ycomments.reply(thread.id, thread.parentId);
+        html += "<p>" + $.fn.ycomments.reply(thread.id, thread.parentId) + "</p>";
 
         $.each(thread.children, function () {
             html += $.fn.ycomments.thread(this);
