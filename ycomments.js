@@ -19,7 +19,7 @@
         $this.append(discuss);
 
         var jump = $("<a href='#ycomments-thread' id='ycomments-jump'>" +
-            "Show comments on Hacker News</a>");
+            "Show comments</a>");
         $this.append(jump);
 
         $.ajax({url: url, dataType: settings.apidatatype})
@@ -28,6 +28,7 @@
 
     showcomments = function (data, jump, article) {
         jump.text(jump.text().replace("Show", data.commentCount));
+        jump.before(data.points + " points | ");
 
         var comments = "<section id='ycomments-thread'>" + 
             "<header><h1>Showing " + data.commentCount + " comments</h1>" +
