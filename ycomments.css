@@ -15,8 +15,13 @@
     color: #888888;
 }
 
-.ycomments-meta li {
+ul.ycomments-meta {
+    margin: 0;
+    padding: 0;
+}
+
+ul.ycomments-meta li {
     list-style-type: none;
     display: inline;
-    margin: 0 .2em 0 .2em;
+    margin: 0;
 }
