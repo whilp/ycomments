@@ -41,6 +41,7 @@
     $.fn.ycomments.thread = function (thread) {
         var html = "<article class='ycomments-comment'>" +
             "<header><p>" + 
+                $.fn.ycomments.vote(thread.id, thread.parentId) + " " +
                 thread.points + " points " +
                 "by " + $.fn.ycomments.user(thread.postedBy) + " " +
                 thread.postedAgo + " | " + $.fn.ycomments.postid(thread.id, "link") +
@@ -70,6 +71,12 @@
             .replace(/&/g, "&amp;")
             .replace(/color=\"#......\"/, "")
             .replace(/<p>/g, "<br />");
+    };
+
+    $.fn.ycomments.vote = function (id, parent) {
+        return "<a class='ycomments-vote' " +
+            "href='http://news.ycombinator.com/vote?for=" + id +
+            "&amp;dir=up&amp;whence=item&amp;id=" + (parent ? parent : id) + "'>▲</a>";
     };
 })(jQuery);
 
