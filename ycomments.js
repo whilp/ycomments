@@ -46,6 +46,9 @@
                 "by " + $.fn.ycomments.user(thread.postedBy) + " " +
                 thread.postedAgo + " | " + $.fn.ycomments.postid(thread.id, "link") +
             "</p></header>";
+
+        html += $.fn.ycomments.comment(thread.comment);
+
         $.each(thread.children, function () {
             html += $.fn.ycomments.thread(this, depth + 1);
         });
@@ -57,10 +60,14 @@
     $.fn.ycomments.user = function (user) {
         var html = "<a href='http://news.ycombinator.com/user?id=%s'>%s</a>";
         return html.replace(/%s/g, user);
-    }
+    };
 
     $.fn.ycomments.postid = function (id, text) {
         return "<a href='http://news.ycombinator.com/item?id=" + id + "'>" + text + "</a>";
-    }
+    };
+
+    $.fn.ycomments.comment = function (comment) {
+        return comment.replace(/<p>/g, "<br />");
+    };
 })(jQuery);
 
