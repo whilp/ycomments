@@ -41,7 +41,7 @@
     $.fn.ycomments.thread = function (thread) {
         var html = "<article class='ycomments-comment'>" +
             "<header><p>" + 
-                $.fn.ycomments.vote(thread.id, thread.parentId) + " " +
+                $.fn.ycomments.vote(thread.id, settings.id) + " " +
                 thread.points + " points " +
                 "by " + $.fn.ycomments.user(thread.postedBy) + " " +
                 thread.postedAgo + " | " + $.fn.ycomments.postid(thread.id, "link") +
@@ -51,7 +51,7 @@
         if (thread.points < 1)
             html += " ycomments-unpopular";
         html += "'>" + $.fn.ycomments.comment(thread.comment) + "</p>";
-        html += "<p>" + $.fn.ycomments.reply(thread.id, thread.parentId) + "</p>";
+        html += "<p>" + $.fn.ycomments.reply(thread.id, settings.id) + "</p>";
 
         $.each(thread.children, function () {
             html += $.fn.ycomments.thread(this);
